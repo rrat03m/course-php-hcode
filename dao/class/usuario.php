@@ -60,6 +60,53 @@ class Usuario extends Sql{
 	}
 
 
+
+	public static function getList()
+	{
+		$sql = new Sql();
+
+		return $sql->select("SELECT * FROM tb_usuarios ORDER BY `des_login`");
+	}
+
+
+
+	public static function search($login)
+	{
+		$sql = new Sql();
+
+		return $sql->select("SELECT * FROM tb_usuarios WHERE des_login LIKE :SEARCH ORDER BY des_login", array(
+			"SEARCH" => "%".$login."%"
+		));
+
+
+	}
+
+
+	public function login($login, $senha)
+	{
+		$sql = new Sql();
+
+		$results = $sql->select("SELECT * FROM tb_usuarios WHERE `des_login` = :LOGIN and `des_senha` = :PASSWORD", array(
+			":LOGIN" => $login,
+			":PASSWORD" => $senha
+		));
+
+		if (count($results) > 0) {
+
+			$row = $results[0];
+			
+			$this->setIdusuario($row['uid']);
+			$this->setDesLogin($row['des_login']);
+			$this->setDesSenha($row['des_senha']);
+
+		} else {
+
+			throw new Exception("LOGIN OU SENHA INCORRETOS");
+			
+		}
+	}
+
+
 	public function __toString()
 	{
 
