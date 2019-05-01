@@ -23,4 +23,5 @@ $arquivo = fopen("index.php", "r");
 // var_dump($arquivo); 
 
 $nulo = null;
+
 ?>

@@ -16,6 +16,6 @@ function SegundaFuncao()
 }
 
 // MostraNome();
-SegundaFuncao();
+MostraNome();
 
 ?>
