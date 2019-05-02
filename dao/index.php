@@ -79,12 +79,21 @@ require_once("config.php");
 	Atualizando usuário com método update
 */
 
+// $usuario = new Usuario();
+
+// $usuario->loadById(7);
+
+// $usuario->update("professor", "123456");
+
+// echo($usuario);
+
+
 $usuario = new Usuario();
 
 $usuario->loadById(7);
 
-$usuario->update("professor", "123456");
-
 echo($usuario);
+
+$usuario->delete();
 
 ?>

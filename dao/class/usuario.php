@@ -137,6 +137,20 @@ class Usuario extends Sql{
 	}
 
 
+	public function delete()
+	{
+		$sql = new Sql();
+
+		$sql->query("DELETE FROM tb_usuarios WHERE `uid` = :ID", array(
+			":ID" => $this->getIdusuario()
+		));
+
+		$this->setIdusuario(0);
+		$this->setDesLogin("");
+		$this->setDesSenha("");
+	}
+
+
 	public function setData($data)
 	{
 		$this->setIdusuario($data['uid']);
