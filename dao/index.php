@@ -51,13 +51,40 @@ require_once("config.php");
 	Carrega um usuário autenticado
 */
 
-$login = new Usuario();
+// $login = new Usuario();
 
-$userLogin = "José";
-$passwordLogin = "123"; 
+// $userLogin = "José";
+// $passwordLogin = "123"; 
 
-$login->login($userLogin, $passwordLogin);
+// $login->login($userLogin, $passwordLogin);
 
-echo $login;
+// echo $login;
+
+
+/**
+	Criando usuário com procedures
+*/
+
+// $aluno = new Usuario();
+
+// $aluno->setDesLogin("aluno");
+// $aluno->setDesSenha("@lun0");
+
+// $aluno->insert();
+
+// echo $aluno;
+
+
+/**
+	Atualizando usuário com método update
+*/
+
+$usuario = new Usuario();
+
+$usuario->loadById(7);
+
+$usuario->update("professor", "123456");
+
+echo($usuario);
 
 ?>

@@ -8,7 +8,6 @@ class Usuario extends Sql{
 
 	private $des_senha;
 
-
 	public function getIdusuario()
 	{
 		return $this->uid;
@@ -105,6 +104,45 @@ class Usuario extends Sql{
 			
 		}
 	}
+
+
+	public function insert()
+	{
+		$sql = new Sql();
+
+		$results = $sql->select("CALL sp_usuarios_insert(:LOGIN, :PASSWORD)", array(
+			":LOGIN" => $this->getDesLogin(),
+			":PASSWORD" => $this->getDesSenha()
+		));
+
+		if(count($results) > 0)
+		{
+			$this->setData($results[0]);
+		}
+	}
+
+
+	public function update($login, $password)
+	{
+		$this->setDesLogin($login);
+		$this->setDesSenha($password);
+
+		$sql = new Sql();
+
+		$sql->query("UPDATE tb_usuarios SET `des_login` = :LOGIN, `des_senha` = :SENHA WHERE `uid` = :ID",array(
+			":LOGIN" => $this->getDesLogin(),
+			":SENHA" => $this->getDesSenha(),
+			":ID" => $this->getIdusuario()
+		));
+	}
+
+
+	public function setData($data)
+	{
+		$this->setIdusuario($data['uid']);
+		$this->setDesLogin($data['des_login']);
+		$this->setDesSenha($data['des_senha']);		
+	}	
 
 
 	public function __toString()
